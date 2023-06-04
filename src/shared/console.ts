@@ -1,6 +1,5 @@
-/* eslint-disable no-undef */
 import { createLogger, format, transports } from 'winston'
-const { combine, timestamp, label, printf, prettyPrint } = format
+const { combine, timestamp, label, printf } = format
 import DailyRotateFile from 'winston-daily-rotate-file'
 import path from 'path'
 
@@ -15,12 +14,9 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
 
 const infologger = createLogger({
   level: 'info',
-  format: combine(
-    label({ label: 'please work on it!' }),
-    timestamp(),
-    myFormat,
-    prettyPrint()
-  ),
+  format: combine(label({ label: 'paleblue.dev' }), timestamp(), myFormat),
+  //prettyPrint()
+  // ),
   transports: [
     new transports.Console(),
     new DailyRotateFile({
@@ -40,11 +36,9 @@ const infologger = createLogger({
 
 const errorlogger = createLogger({
   level: 'error',
-  format: combine(
-    label({ label: 'please work on it!' }),
-    timestamp(),
-    myFormat
-  ),
+  format: combine(label({ label: 'paleblue.dev' }), timestamp(), myFormat),
+  //   prettyPrint()
+  //  ),
   transports: [
     new transports.Console(),
     new DailyRotateFile({

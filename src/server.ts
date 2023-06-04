@@ -7,7 +7,7 @@ import { infologger, errorlogger } from './shared/console'
 async function server() {
   try {
     await mongoose.connect(config.database_url as string)
-    infologger.info('♻️ Database connected✅')
+    infologger.info('♻️  Database connected✅')
 
     app.listen(config.port, () => {
       infologger.info(`Application app listening on port ${config.port}`)
