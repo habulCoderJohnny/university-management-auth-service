@@ -23,7 +23,7 @@ const infologger = createLogger({
       filename: path.join(
         process.cwd(),
         'error-catcher',
-        'logs',
+        'success',
         '%DATE%-success.log'
       ),
       datePattern: 'YYYY-DD-MM-HH',
@@ -45,7 +45,7 @@ const errorlogger = createLogger({
       filename: path.join(
         process.cwd(),
         'error-catcher',
-        'logs',
+        'error',
         '%DATE%-error.log'
       ),
       datePattern: 'YYYY-DD-MM-HH',
