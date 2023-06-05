@@ -4,14 +4,20 @@ import app from './app'
 import { Server } from 'http'
 import { infologger, errorlogger } from './shared/console'
 
+process.on('uncaoughtException', err => {
+  errorlogger.error(err)
+  process.exit(1)
+})
+
+let serverStatus: Server
+
 // connectivity
 async function server() {
-  let server: Server
   try {
     await mongoose.connect(config.database_url as string)
     infologger.info('♻️  Database connected✅')
 
-    server = app.listen(config.port, () => {
+    serverStatus = app.listen(config.port, () => {
       infologger.info(`Application app listening on port ${config.port}`)
     })
   } catch (err) {
@@ -19,10 +25,8 @@ async function server() {
   }
 
   process.on('unhandleRejection', error => {
-    console.log('unhandle detected!! w re close server')
-
-    if (server) {
-      server.close(() => {
+    if (serverStatus) {
+      serverStatus.close(() => {
         errorlogger.error('Server closed ', error)
         process.exit(1)
       })
@@ -32,3 +36,9 @@ async function server() {
   })
 }
 server()
+process.on('SIGTERM', () => {
+  infologger.info('SIGTERM is received')
+  if (serverStatus) {
+    serverStatus.close()
+  }
+})
