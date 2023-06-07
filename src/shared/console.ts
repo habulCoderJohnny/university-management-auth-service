@@ -1,16 +1,16 @@
-import { createLogger, format, transports } from 'winston'
-const { combine, timestamp, label, printf } = format
-import DailyRotateFile from 'winston-daily-rotate-file'
-import path from 'path'
+import { createLogger, format, transports } from 'winston';
+const { combine, timestamp, label, printf } = format;
+import DailyRotateFile from 'winston-daily-rotate-file';
+import path from 'path';
 
 //format
 const myFormat = printf(({ level, message, label, timestamp }) => {
-  const date = new Date(timestamp)
-  const hour = date.getHours()
-  const minutes = date.getMinutes()
-  const seconds = date.getSeconds()
-  return `${date.toDateString()} ${hour}:${minutes}:${seconds} } [${label}] ${level}: ${message}`
-})
+  const date = new Date(timestamp);
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  return `${date.toDateString()} ${hour}:${minutes}:${seconds} } [${label}] ${level}: ${message}`;
+});
 
 const infologger = createLogger({
   level: 'info',
@@ -23,7 +23,7 @@ const infologger = createLogger({
       filename: path.join(
         process.cwd(),
         'error-catcher',
-        'logs',
+        'success',
         '%DATE%-success.log'
       ),
       datePattern: 'YYYY-DD-MM-HH',
@@ -32,7 +32,7 @@ const infologger = createLogger({
       maxFiles: '14d',
     }),
   ],
-})
+});
 
 const errorlogger = createLogger({
   level: 'error',
@@ -45,7 +45,7 @@ const errorlogger = createLogger({
       filename: path.join(
         process.cwd(),
         'error-catcher',
-        'logs',
+        'error',
         '%DATE%-error.log'
       ),
       datePattern: 'YYYY-DD-MM-HH',
@@ -54,6 +54,6 @@ const errorlogger = createLogger({
       maxFiles: '14d',
     }),
   ],
-})
+});
 
-export { infologger, errorlogger }
+export { infologger, errorlogger };

@@ -1,24 +1,28 @@
-import express, { Application } from 'express'
-import cors from 'cors'
-import usersRouter from './apps/modules/users/users.route'
-import globalErrorHandler from './apps/middlewares/globalErrorHandler'
+import express, { Application } from 'express';
+import cors from 'cors';
+import { UserRoutes } from './apps/modules/users/user.route';
+import globalErrorHandler from './apps/middlewares/globalErrorHandler';
 
-const app: Application = express()
+const app: Application = express();
 
-app.use(cors())
+app.use(cors());
 
 // parser
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Application routes
-app.use('/api/v1/users/', usersRouter)
+app.use('/api/v1/users/', UserRoutes);
 
 // Testing
-/* app.get('/', async (req: Request, res: Response) => {
-  res.send('Hello from server world! 💯')
-}) */
+// app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+//   Promise.reject(new Error('Unhandle promised rejection'))
+// })
+
+// throw new ApiError(400, 'Ore Baba Error ')
+// next('Ore Baba Error') // Error
+// res.send('Hello from server world! 💯')
 
 //global error handler
-app.use(globalErrorHandler)
-export default app
+app.use(globalErrorHandler);
+export default app;
