@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 
-type Month =
+export type Month =
   | 'January'
   | 'February'
   | 'March'
@@ -13,6 +13,10 @@ type Month =
   | 'October'
   | 'November'
   | 'December';
+
+export type ISemesterTitles = 'Autumn' | 'Summer' | 'Fall';
+export type ISemesterCodes = '01' | '02' | '03';
+export type ISemesterMonths = Month;
 
 // s1 Create an Interface [type declared]
 export type ISemester = {
