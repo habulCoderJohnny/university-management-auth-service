@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 
-// s1 Create an Interface [type declore]
+// s1 Create an Interface [type declared]
 export type IUser = {
   id: string;
   name: string;
