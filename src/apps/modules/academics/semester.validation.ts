@@ -1,55 +1,28 @@
 import { z } from 'zod';
+import {
+  SemesterCodes,
+  SemesterMonths,
+  SemesterTitles,
+} from './semester.constant';
 
 const semesterZodSchema = z.object({
   body: z.object({
-    title: z.enum(['Autumn', 'Summer', 'Fall'], {
+    title: z.enum([...SemesterTitles] as [string, ...string[]], {
       required_error: 'title is mandatory',
     }),
     year: z.string({
       required_error: 'year is required',
     }),
 
-    code: z.enum(['01', '02', '03'], {
+    code: z.enum([...SemesterCodes] as [string, ...string[]], {
       required_error: 'code is required',
     }),
-    startMonth: z.enum(
-      [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ],
-      {
-        required_error: 'start month is required',
-      }
-    ),
-    endMonth: z.enum(
-      [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ],
-      {
-        required_error: 'end month is required',
-      }
-    ),
+    startMonth: z.enum([...SemesterMonths] as [string, ...string[]], {
+      required_error: 'start month is required',
+    }),
+    endMonth: z.enum([...SemesterMonths] as [string, ...string[]], {
+      required_error: 'end month is required',
+    }),
   }),
 });
 
