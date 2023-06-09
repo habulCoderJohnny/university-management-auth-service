@@ -22,3 +22,13 @@ export const SemesterMonths: ISemesterMonths[] = [
   'November',
   'December',
 ];
+
+// Semester title_Code declare
+export const semesterTitle_CodeMapper: {
+  [key: string]: string;
+} = {
+  Autumn: '01',
+  Summer: '02',
+  Fall: '03',
+//Winter: '04',
+};
