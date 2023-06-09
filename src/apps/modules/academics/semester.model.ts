@@ -1,6 +1,8 @@
 import { Schema, model } from 'mongoose';
 import { ISemester, SemesterModel } from './semester.interface';
 import { SemesterMonths } from './semester.constant';
+import ApiError from '../../../errors/ApiError';
+import httpStatus from 'http-status';
 
 // s2. Create a Schema (status)
 const semesterSchema = new Schema<ISemester>(
@@ -16,8 +18,23 @@ const semesterSchema = new Schema<ISemester>(
   }
 );
 
+// Duplicate year issue
+semesterSchema.pre('save', async function (next) {
+  const isExist = await AcademicSemester.findOne({
+    title: this.title,
+    year: this.year,
+  });
+  if (isExist) {
+    throw new ApiError(
+      httpStatus.CONFLICT,
+      '🚫 Academic semester is already exist ‼️'
+    );
+  }
+  next();
+});
+
 // s4. static
-export const AcaSemester = model<ISemester, SemesterModel>(
-  'AcaSemester',
+export const AcademicSemester = model<ISemester, SemesterModel>(
+  'AcademicSemester',
   semesterSchema
 );
