@@ -9,7 +9,6 @@ const createSemester = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { ...academicSemesterData } = req.body;
     const result = await SemesterService.createSemester(academicSemesterData);
-    next();
     sendResponse<ISemester>(res, {
       statusCode: httpStatus.OK,
       success: true,
@@ -21,6 +20,7 @@ const createSemester = catchAsync(
       message: '✅ Academic Semester data created successfully',
       data: result,
     }); */
+    next();
   }
 );
 
