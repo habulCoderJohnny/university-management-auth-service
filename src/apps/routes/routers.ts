@@ -10,7 +10,7 @@ const ApplicationRoutes = [
     route: UserRoutes,
   },
   {
-    path: '/semester',
+    path: '/semesters',
     route: AcademicSemesterRoutes,
   },
 ];
