@@ -5,9 +5,9 @@ type IApiResponse<T> = {
   success: boolean;
   message?: string | null;
   meta?: {
-    pageNo: number;
+    page: number;
     limit: number;
-    totalPg: number;
+    total: number;
   };
   data?: T | null;
 };

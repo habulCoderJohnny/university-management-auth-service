@@ -3,8 +3,10 @@ import ApiError from '../../../errors/ApiError';
 import { semesterTitle_CodeMapper } from './semester.constant';
 import { ISemester } from './semester.interface';
 import { AcademicSemester } from './semester.model';
-import { IPaginationOptions } from '../../../interfaces/typePagination';
+import { IPaginationOptions } from '../../../pagination/typePagination';
 import { IGenericResponse } from '../../../interfaces/common';
+import { paginationSort } from '../../../pagination/paginationSort';
+import { SortOrder } from 'mongoose';
 
 // s6. database logic.
 const createSemester = async (payload: ISemester): Promise<ISemester> => {
@@ -19,18 +21,24 @@ const createSemester = async (payload: ISemester): Promise<ISemester> => {
   return result;
 };
 
+// Pagination
 const getAllSemester = async (
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<ISemester[]>> => {
-  const { pageNo = 1, limit = 10 } = paginationOptions;
-  const skip = (pageNo - 1) * limit;
+  const { page, limit, skip, sortBy, sortOrder } =
+    paginationSort.calculatePagination(paginationOptions);
+
+  const sortConditions: { [key: string]: SortOrder } = {};
+  if (sortBy && sortOrder) {
+    sortConditions[sortBy] = sortOrder;
+  }
   const result = await AcademicSemester.find().sort().skip(skip).limit(limit);
-  const totalPg = await AcademicSemester.countDocuments();
+  const total = await AcademicSemester.countDocuments();
   return {
     meta: {
-      pageNo,
+      page,
       limit,
-      totalPg,
+      total,
     },
     data: result,
   };
