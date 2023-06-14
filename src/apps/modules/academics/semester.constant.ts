@@ -32,3 +32,10 @@ export const semesterTitle_CodeMapper: {
   Fall: '03',
 //Winter: '04',
 };
+
+export const semesterFilterableFields = [
+  'searchTerm',
+  'title',
+  'code',
+  'year',
+];

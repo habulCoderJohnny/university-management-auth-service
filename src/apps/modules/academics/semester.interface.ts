@@ -28,3 +28,7 @@ export type ISemester = {
 };
 // s3. Create a user Model
 export type SemesterModel = Model<ISemester>;
+
+export type ISemesterFilters = {
+  searchTerm?: string;
+};

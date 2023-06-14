@@ -3,9 +3,9 @@ import { IGenericErrorMessage } from './error';
 //GENERIC
 export type IGenericResponse<T> = {
   meta: {
-    pageNo: number;
+    page: number;
     limit: number;
-    totalPg: number;
+    total: number;
   };
   data: T;
 };

@@ -6,6 +6,7 @@ import httpStatus from 'http-status';
 import { ISemester } from './semester.interface';
 import pgPicker from '../../../shared/pgPicker';
 import { paginationField } from '../../../constant/pagination';
+import { semesterFilterableFields } from './semester.constant';
 
 const createSemester = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -21,17 +22,15 @@ const createSemester = catchAsync(
   }
 );
 
-// pagination & sort
+// filtering & pagination & sort
 const getAllSemester = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    // const paginationOptions = {
-    //   page: Number(req.query.page),
-    //   limit: Number(req.query.limit),
-    //   sortBy: (req.query.sortBy),
-    //   sortOrder: (req.query.sortOrder),
-    // };
+    const filters = pgPicker(req.query, semesterFilterableFields); //
     const paginationOptions = pgPicker(req.query, paginationField);
-    const result = await SemesterService.getAllSemester(paginationOptions);
+    const result = await SemesterService.getAllSemester(
+      filters,
+      paginationOptions
+    );
 
     sendResponse<ISemester[]>(res, {
       statusCode: httpStatus.OK,
