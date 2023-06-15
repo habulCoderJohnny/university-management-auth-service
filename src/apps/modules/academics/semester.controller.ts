@@ -25,7 +25,7 @@ const createSemester = catchAsync(
 // filtering & pagination & sort
 const getAllSemester = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const filters = pgPicker(req.query, semesterFilterableFields); //
+    const filters = pgPicker(req.query, semesterFilterableFields); //filtering
     const paginationOptions = pgPicker(req.query, paginationField);
     const result = await SemesterService.getAllSemester(
       filters,

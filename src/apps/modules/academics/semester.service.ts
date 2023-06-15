@@ -1,6 +1,9 @@
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
-import { semesterTitle_CodeMapper } from './semester.constant';
+import {
+  semesterSearchableFields,
+  semesterTitle_CodeMapper,
+} from './semester.constant';
 import { ISemester, ISemesterFilters } from './semester.interface';
 import { AcademicSemester } from './semester.model';
 import { IPaginationOptions } from '../../../pagination/typePagination';
@@ -27,32 +30,55 @@ const getAllSemester = async (
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<ISemester[]>> => {
   //searching
-  const { searchTerm } = filters;
+  const { searchTerm, ...filtersData } = filters;
+  const andConditions = [];
 
-  const andConditions = [
-    {
-      $or: [
-        {
-          title: {
-            $regex: searchTerm,
-            $options: 'i',
-          },
+  //searching
+  if (searchTerm) {
+    andConditions.push({
+      // or
+      $or: semesterSearchableFields.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
         },
-        {
-          code: {
-            $regex: searchTerm,
-            $options: 'i',
-          },
-        },
-        {
-          year: {
-            $regex: searchTerm,
-            $options: 'i',
-          },
-        },
-      ],
-    },
-  ];
+      })),
+    });
+  }
+  //filtering
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      //and q
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    });
+  }
+
+  // const andConditions = [
+  //   {
+  //     $or: [
+  //       {
+  //         title: {
+  //           $regex: searchTerm,
+  //           $options: 'i',
+  //         },
+  //       },
+  //       {
+  //         code: {
+  //           $regex: searchTerm,
+  //           $options: 'i',
+  //         },
+  //       },
+  //       {
+  //         year: {
+  //           $regex: searchTerm,
+  //           $options: 'i',
+  //         },
+  //       },
+  //     ],
+  //   },
+  // ];
 
   const { page, limit, skip, sortBy, sortOrder } =
     paginationSort.calculatePagination(paginationOptions);
