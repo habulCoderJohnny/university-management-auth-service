@@ -21,7 +21,7 @@ export type ISemesterMonths = Month;
 // s1 Create an Interface [type declared]
 export type ISemester = {
   title: 'Autumn' | 'Summer' | 'Fall'; //s
-  year: number;
+  year: string;
   code: '01' | '02' | '03'; //string;
   startMonth: Month;
   endMonth: Month;
