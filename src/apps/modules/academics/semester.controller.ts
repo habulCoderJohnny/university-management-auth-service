@@ -46,13 +46,23 @@ const getAllSemester = catchAsync(
 // Get Individual Semester using ID
 const getSingleSemester = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
-
   const result = await SemesterService.getSingleSemester(id);
-
   sendResponse<ISemester>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Get Individual Semester successfully!',
+    data: result,
+  });
+});
+// update Semester by ID
+const updateSemester = catchAsync(async (req: Request, res: Response) => {
+  const updatedData = req.body;
+  const id = req.params.id;
+  const result = await SemesterService.updateSemester(id, updatedData);
+  sendResponse<ISemester>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Individual Semester Updated successfully!',
     data: result,
   });
 });
@@ -61,4 +71,5 @@ export const SemesterController = {
   createSemester,
   getAllSemester,
   getSingleSemester,
+  updateSemester,
 };
