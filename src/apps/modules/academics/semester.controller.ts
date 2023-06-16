@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import {Request, Response } from 'express';
 import { SemesterService } from './semester.service';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
@@ -9,7 +9,7 @@ import { paginationField } from '../../../constant/pagination';
 import { semesterFilterableFields } from './semester.constant';
 
 const createSemester = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response) => {
     const { ...academicSemesterData } = req.body;
     const result = await SemesterService.createSemester(academicSemesterData);
     sendResponse<ISemester>(res, {
@@ -18,13 +18,12 @@ const createSemester = catchAsync(
       message: '✅Academic Semester data created successfully!',
       data: result,
     });
-    next();
   }
 );
 
 // filtering & pagination & sort
 const getAllSemester = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response) => {
     const filters = pgPicker(req.query, semesterFilterableFields); //filtering
     const paginationOptions = pgPicker(req.query, paginationField);
     const result = await SemesterService.getAllSemester(
@@ -39,7 +38,6 @@ const getAllSemester = catchAsync(
       meta: result.meta,
       data: result.data,
     });
-    next();
   }
 );
 
