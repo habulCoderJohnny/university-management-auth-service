@@ -8,7 +8,7 @@ import httpStatus from 'http-status';
 const semesterSchema = new Schema<ISemester>(
   {
     title: { type: String, required: true, enum: ['Autumn', 'Summer', 'Fall'] },
-    year: { type: Number, required: true },
+    year: { type: String, required: true },
     code: { type: String, required: true, enum: ['01', '02', '03'] },
     startMonth: { type: String, required: true, enum: SemesterMonths },
     endMonth: { type: String, required: true, enum: SemesterMonths },
