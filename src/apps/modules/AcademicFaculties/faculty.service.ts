@@ -7,6 +7,13 @@ const createACFaculty = async (payload: IACFaculty): Promise<IACFaculty> => {
   return result;
 };
 
+// get all
+const getAllACFaculties = async (): Promise<IACFaculty[]> => {
+  const result = await AcademicFaculty.find();
+  return result;
+};
+
 export const ACFacultyService = {
   createACFaculty,
+  getAllACFaculties,
 };

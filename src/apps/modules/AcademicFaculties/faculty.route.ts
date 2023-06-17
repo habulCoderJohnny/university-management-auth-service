@@ -10,5 +10,6 @@ router.post(
   validateRequest(ACFacultyValidation.createFacultyZodSchema),
   ACFacultyController.createACFaculty
 );
+router.get('/', ACFacultyController.getAllFaculty);
 
 export const ACFacultyRoutes = router;
