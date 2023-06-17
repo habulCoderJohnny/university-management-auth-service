@@ -19,7 +19,7 @@ const createACFaculty = catchAsync(async (req: Request, res: Response) => {
 
 // getAllController
 const getAllFaculty = catchAsync(async (req: Request, res: Response) => {
-  const result = await ACFacultyService.getAllACFaculties();
+  const result = await ACFacultyService.getAllFaculties();
   sendResponse<IACFaculty[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -31,7 +31,7 @@ const getAllFaculty = catchAsync(async (req: Request, res: Response) => {
 // get oneController using ID
 const getOneFaculty = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
-  const result = await ACFacultyService.getOneFaculty(id);
+  const result = await ACFacultyService.getAFaculty(id);
   sendResponse<IACFaculty>(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -53,9 +53,22 @@ const updateFaculty = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// deleteController
+const deleteFaculty = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await ACFacultyService.deleteFaculty(id);
+  sendResponse<IACFaculty>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Deleted Individual Semester from database!',
+    data: result,
+  });
+});
+
 export const ACFacultyController = {
   createACFaculty,
   getAllFaculty,
   getOneFaculty,
   updateFaculty,
+  deleteFaculty,
 };

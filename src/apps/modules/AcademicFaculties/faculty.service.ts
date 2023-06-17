@@ -8,13 +8,13 @@ const createACFaculty = async (payload: IACFaculty): Promise<IACFaculty> => {
 };
 
 // get all service
-const getAllACFaculties = async (): Promise<IACFaculty[]> => {
+const getAllFaculties = async (): Promise<IACFaculty[]> => {
   const result = await AcademicFaculty.find();
   return result;
 };
 
 // get one service
-const getOneFaculty = async (id: string): Promise<IACFaculty | null> => {
+const getAFaculty = async (id: string): Promise<IACFaculty | null> => {
   const result = await AcademicFaculty.findById(id);
   return result;
 };
@@ -30,9 +30,16 @@ const updateFaculty = async (
   return result;
 };
 
+// delete one service
+const deleteFaculty = async (id: string): Promise<IACFaculty | null> => {
+  const result = await AcademicFaculty.findByIdAndDelete(id);
+  return result;
+};
+
 export const ACFacultyService = {
   createACFaculty,
-  getAllACFaculties,
-  getOneFaculty,
+  getAllFaculties,
+  getAFaculty,
   updateFaculty,
+  deleteFaculty,
 };
