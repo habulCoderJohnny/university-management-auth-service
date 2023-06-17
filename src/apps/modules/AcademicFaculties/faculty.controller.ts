@@ -28,7 +28,20 @@ const getAllFaculty = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// get one controller using ID
+const getOneFaculty = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await ACFacultyService.getOneFaculty(id);
+  sendResponse<IACFaculty>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get Individual Faculty  successfully!',
+    data: result,
+  });
+});
+
 export const ACFacultyController = {
   createACFaculty,
   getAllFaculty,
+  getOneFaculty,
 };
