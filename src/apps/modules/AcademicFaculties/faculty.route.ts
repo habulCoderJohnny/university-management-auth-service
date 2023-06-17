@@ -12,5 +12,5 @@ router.post(
 );
 router.get('/:id', ACFacultyController.getOneFaculty);
 router.get('/', ACFacultyController.getAllFaculty);
-
+router.patch('/update/:id', ACFacultyController.updateFaculty);
 export const ACFacultyRoutes = router;
