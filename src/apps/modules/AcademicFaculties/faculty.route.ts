@@ -12,5 +12,10 @@ router.post(
 );
 router.get('/:id', ACFacultyController.getOneFaculty);
 router.get('/', ACFacultyController.getAllFaculty);
-
+router.patch(
+  '/update/:id',
+  validateRequest(ACFacultyValidation.updateFacultyZodSchema),
+  ACFacultyController.updateFaculty
+);
+router.delete('/delete/:id', ACFacultyController.deleteFaculty);
 export const ACFacultyRoutes = router;

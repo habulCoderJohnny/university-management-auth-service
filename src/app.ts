@@ -15,13 +15,10 @@ app.use(express.urlencoded({ extended: true }));
 // Application routes
 app.use('/api/v1', routers);
 
-// Testing
-// app.get('/', async (req: Request, res: Response, next: NextFunction) => {
-//   Promise.reject(new Error('Unhandle promised rejection'))
-// })
-// throw new ApiError(400, 'Ore Baba Error ')
-// next('Ore Baba Error') // Error
-// res.send('Hello from server world! 💯')
+// Root api
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello from university server! 💯');
+});
 
 //global error handler
 app.use(globalErrorHandler);

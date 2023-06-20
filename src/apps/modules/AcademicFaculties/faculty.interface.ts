@@ -9,3 +9,7 @@ export type IACFaculty = {
 
 // s3. Create a user Model
 export type ACFacultyModel = Model<IACFaculty, Record<string, unknown>>;
+
+export type IACFacultyFilters = {
+  searchTerm?: string;
+};
