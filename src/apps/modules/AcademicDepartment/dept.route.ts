@@ -10,8 +10,8 @@ router.post(
   validateRequest(ACDepartmentValidation.createDepartmentZodSchema),
   ACDepartmentController.createACDepartment
 );
-// router.get('/:id', ACDepartmentController.getOneDepartment);
-// router.get('/', ACDepartmentController.getAllDepartment);
+router.get('/:id', ACDepartmentController.getOneDepartment);
+router.get('/', ACDepartmentController.getAllDepartment);
 // router.patch(
 //   '/update/:id',
 //   validateRequest(ACDepartmentValidation.updateDepartmentZodSchema),

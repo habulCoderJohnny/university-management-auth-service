@@ -15,10 +15,10 @@ const createACDepartment = async (
 };
 
 // get all service
-// const getAllFaculties = async (): Promise<IACDepartment[]> => {
-//   const result = await AcademicDepartment.find();
-//   return result;
-// };
+const getAllFaculties = async (): Promise<IACDepartment[]> => {
+  const result = await AcademicDepartment.find();
+  return result;
+};
 
 // // Pagination:searching&filtering+getAllSemester
 // const getAllFaculties = async (
@@ -77,10 +77,10 @@ const createACDepartment = async (
 // };
 
 // // get one service
-// const getADepartment = async (id: string): Promise<IACDepartment | null> => {
-//   const result = await AcademicDepartment.findById(id);
-//   return result;
-// };
+const getADepartment = async (id: string): Promise<IACDepartment | null> => {
+  const result = await AcademicDepartment.findById(id);
+  return result;
+};
 
 // // update one service
 // const updateDepartment = async (
@@ -101,8 +101,8 @@ const createACDepartment = async (
 
 export const ACDepartmentService = {
   createACDepartment,
-  // getAllFaculties,
-  // getADepartment,
+  getAllFaculties,
+  getADepartment,
   // updateDepartment,
   // deleteDepartment,
 };

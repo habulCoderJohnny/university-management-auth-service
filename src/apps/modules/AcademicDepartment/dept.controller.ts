@@ -21,7 +21,7 @@ const createACDepartment = catchAsync(async (req: Request, res: Response) => {
 });
 
 // getAllController
-/* const getAllDepartment = catchAsync(async (req: Request, res: Response) => {
+const getAllDepartment = catchAsync(async (req: Request, res: Response) => {
   const result = await ACDepartmentService.getAllFaculties();
   sendResponse<IACDepartment[]>(res, {
     statusCode: httpStatus.OK,
@@ -29,9 +29,9 @@ const createACDepartment = catchAsync(async (req: Request, res: Response) => {
     message: '✅All Department retrieved successfully!',
     data: result,
   });
-}); */
+});
 
-// // filtering & pagination & sort
+// filtering & pagination & sort
 // const getAllDepartment = catchAsync(async (req: Request, res: Response) => {
 //   const filters = pgPicker(req.query, DepartmentFilterableFields); //filtering
 //   const paginationOptions = pgPicker(req.query, paginationField);
@@ -50,16 +50,16 @@ const createACDepartment = catchAsync(async (req: Request, res: Response) => {
 // });
 
 // // get oneController using ID
-// const getOneDepartment = catchAsync(async (req: Request, res: Response) => {
-//   const id = req.params.id;
-//   const result = await ACDepartmentService.getADepartment(id);
-//   sendResponse<IACdepartment>(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'Get Individual Department  successfully!',
-//     data: result,
-//   });
-// });
+const getOneDepartment = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await ACDepartmentService.getADepartment(id);
+  sendResponse<IACDepartment>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get Individual Department  successfully!',
+    data: result,
+  });
+});
 
 // // updateController using ID
 // const updateDepartment = catchAsync(async (req: Request, res: Response) => {
@@ -88,8 +88,8 @@ const createACDepartment = catchAsync(async (req: Request, res: Response) => {
 
 export const ACDepartmentController = {
   createACDepartment,
-  // getAllDepartment,
-  // getOneDepartment,
+  getAllDepartment,
+  getOneDepartment,
   // updateDepartment,
   // deleteDepartment,
 };
