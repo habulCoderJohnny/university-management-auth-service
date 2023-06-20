@@ -62,34 +62,34 @@ const getOneDepartment = catchAsync(async (req: Request, res: Response) => {
 });
 
 // // updateController using ID
-// const updateDepartment = catchAsync(async (req: Request, res: Response) => {
-//   const updatedData = req.body;
-//   const id = req.params.id;
-//   const result = await ACDepartmentService.updateDepartment(id, updatedData);
-//   sendResponse<IACdepartment>(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'Individual Department Updated successfully!',
-//     data: result,
-//   });
-// });
+const updateDepartment = catchAsync(async (req: Request, res: Response) => {
+  const updatedData = req.body;
+  const id = req.params.id;
+  const result = await ACDepartmentService.updateDepartment(id, updatedData);
+  sendResponse<IACDepartment>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Individual Department Updated successfully!',
+    data: result,
+  });
+});
 
 // // deleteController
-// const deleteDepartment = catchAsync(async (req: Request, res: Response) => {
-//   const id = req.params.id;
-//   const result = await ACDepartmentService.deleteDepartment(id);
-//   sendResponse<IACdepartment>(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'Deleted Individual Semester from database!',
-//     data: result,
-//   });
-// });
+const deleteDepartment = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await ACDepartmentService.deleteDepartment(id);
+  sendResponse<IACDepartment>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Deleted Individual Dept from database!',
+    data: result,
+  });
+});
 
 export const ACDepartmentController = {
   createACDepartment,
   getAllDepartment,
   getOneDepartment,
-  // updateDepartment,
-  // deleteDepartment,
+  updateDepartment,
+  deleteDepartment,
 };

@@ -83,26 +83,30 @@ const getADepartment = async (id: string): Promise<IACDepartment | null> => {
 };
 
 // // update one service
-// const updateDepartment = async (
-//   id: string,
-//   payload: Partial<IACDepartment>
-// ): Promise<IACDepartment | null> => {
-//   const result = await AcademicDepartment.findOneAndUpdate({ _id: id }, payload, {
-//     new: true,
-//   });
-//   return result;
-// };
+const updateDepartment = async (
+  id: string,
+  payload: Partial<IACDepartment>
+): Promise<IACDepartment | null> => {
+  const result = await AcademicDepartment.findOneAndUpdate(
+    { _id: id },
+    payload,
+    {
+      new: true,
+    }
+  );
+  return result;
+};
 
 // // delete one service
-// const deleteDepartment = async (id: string): Promise<IACDepartment | null> => {
-//   const result = await AcademicDepartment.findByIdAndDelete(id);
-//   return result;
-// };
+const deleteDepartment = async (id: string): Promise<IACDepartment | null> => {
+  const result = await AcademicDepartment.findByIdAndDelete(id);
+  return result;
+};
 
 export const ACDepartmentService = {
   createACDepartment,
   getAllDepartment,
   getADepartment,
-  // updateDepartment,
-  // deleteDepartment,
+  updateDepartment,
+  deleteDepartment,
 };
