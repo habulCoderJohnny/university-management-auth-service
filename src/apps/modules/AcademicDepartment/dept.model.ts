@@ -9,6 +9,11 @@ const ACDepartmentSchema = new Schema<IACDepartment, ACDepartmentModel>(
       required: true,
       unique: true,
     },
+    academicFaculty: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicFaculty',
+      required: true,
+    },
   },
   {
     timestamps: true,

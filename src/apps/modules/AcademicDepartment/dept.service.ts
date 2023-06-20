@@ -10,7 +10,9 @@ import { SortOrder } from 'mongoose';
 const createACDepartment = async (
   payload: IACDepartment
 ): Promise<IACDepartment> => {
-  const result = await AcademicDepartment.create(payload);
+  const result = (await AcademicDepartment.create(payload)).populate(
+    'academicFaculty'
+  );
   return result;
 };
 
@@ -78,7 +80,9 @@ const getAllDepartment = async (
 
 // // get one service
 const getADepartment = async (id: string): Promise<IACDepartment | null> => {
-  const result = await AcademicDepartment.findById(id);
+  const result = await AcademicDepartment.findById(id).populate(
+    'academicFaculty'
+  );
   return result;
 };
 
@@ -93,7 +97,7 @@ const updateDepartment = async (
     {
       new: true,
     }
-  );
+  ).populate('academicFaculty');
   return result;
 };
 
