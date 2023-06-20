@@ -6,7 +6,7 @@ import { ACFacultyValidation } from './faculty.validation';
 const router = express.Router();
 
 router.post(
-  '/create-faculty',
+  '/create',
   validateRequest(ACFacultyValidation.createFacultyZodSchema),
   ACFacultyController.createACFaculty
 );
