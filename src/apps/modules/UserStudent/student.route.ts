@@ -4,7 +4,7 @@ import { StudentController } from './student.controller';
 
 const router = express.Router();
 
-// router.get('/:id', StudentController.getAStudent);
+router.get('/:id', StudentController.getAStudent);
 router.get('/', StudentController.getAllStudent);
 
 // router.patch(
