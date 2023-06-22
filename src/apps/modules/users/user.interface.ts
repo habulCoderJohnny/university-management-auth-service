@@ -1,11 +1,14 @@
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
+import { IStudent } from '../UserStudent/student.interface';
 
 // s1 Create an Interface [type declared]
 export type IUser = {
   id: string;
-  name: string;
   role: string;
   password: string;
+  student?: Types.ObjectId | IStudent;
+  // faculty?:Types.ObjectId | IFaculty; Future
+  // admin?:Types.ObjectId | IAdmin; Future
 };
 // s3.
 // Create a user Model

@@ -5,22 +5,17 @@ import sendResponse from '../../../shared/sendResponse';
 import { IUser } from './user.interface';
 import httpStatus from 'http-status';
 
-const createUser = catchAsync(async (req: Request, res: Response) => {
-  const { user } = req.body;
-  const result = await UserService.createUser(user);
+const createStudent = catchAsync(async (req: Request, res: Response) => {
+  const { student, ...userData } = req.body;
+  const result = await UserService.createStudent(student, userData);
   sendResponse<IUser>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: '✅user created successfully!',
+    message: '✅Student user created successfully!',
     data: result,
   });
-  /* res.status(200).json({
-      success: true,
-      message: 'user created successfully✅',
-      data: result,
-    }); */
 });
 
 export const UserController = {
-  createUser,
+  createStudent,
 };

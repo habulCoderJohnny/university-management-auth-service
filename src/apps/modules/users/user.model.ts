@@ -5,9 +5,14 @@ import { IUser, UserModel } from './user.interface';
 const userSchema = new Schema<IUser>(
   {
     id: { type: String, required: true, unique: true },
-    name: { type: String, required: true },
     role: { type: String, required: true },
     password: { type: String, required: true },
+    student: {
+      type: Schema.Types.ObjectId,
+      ref: 'Student',
+      // faculty?:Types.ObjectId | IFaculty; Future
+      // admin?:Types.ObjectId | IAdmin; Future
+    },
   },
   {
     timestamps: true,

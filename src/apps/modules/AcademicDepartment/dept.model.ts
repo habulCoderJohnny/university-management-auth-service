@@ -25,6 +25,6 @@ const ACDepartmentSchema = new Schema<IACDepartment, ACDepartmentModel>(
 
 // s4. static
 export const AcademicDepartment = model<IACDepartment, ACDepartmentModel>(
-  'Academic Department',
+  'AcademicDepartment',
   ACDepartmentSchema
 );
