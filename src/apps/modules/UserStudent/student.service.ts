@@ -9,8 +9,10 @@ const getAllStudent = async (): Promise<IStudent[]> => {
 
 // get one service
 const getAStudent = async (id: string): Promise<IStudent | null> => {
-  const result = await Student.findById(id);
-  //   .populate('academicFaculty');
+  const result = await Student.findById(id)
+    .populate('academicSemester')
+    .populate('academicDepartment')
+    .populate('academicFaculty');
   return result;
 };
 
