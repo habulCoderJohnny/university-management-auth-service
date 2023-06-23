@@ -27,7 +27,21 @@ const getAStudent = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// updateController using ID
+const updateStudent = catchAsync(async (req: Request, res: Response) => {
+  const updatedData = req.body;
+  const id = req.params.id;
+  const result = await StudentService.updateStudent(id, updatedData);
+  sendResponse<IStudent>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'A Student Updated successfully!',
+    data: result,
+  });
+});
+
 export const StudentController = {
   getAllStudent,
   getAStudent,
+  updateStudent,
 };
