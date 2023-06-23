@@ -79,8 +79,18 @@ const updateStudent = async (
   return result;
 };
 
+// deleted one service
+const deleteStudent = async (id: string): Promise<IStudent | null> => {
+  const result = await Student.findByIdAndDelete(id)
+    .populate('academicSemester')
+    .populate('academicDepartment')
+    .populate('academicFaculty');
+  return result;
+};
+
 export const StudentService = {
   getAllStudent,
   getAStudent,
   updateStudent,
+  deleteStudent,
 };
