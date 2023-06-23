@@ -10,9 +10,15 @@ const userSchema = new Schema<IUser>(
     student: {
       type: Schema.Types.ObjectId,
       ref: 'Student',
-      // faculty?:Types.ObjectId | IFaculty; Future
-      // admin?:Types.ObjectId | IAdmin; Future
     },
+    faculty: {
+      type: Schema.Types.ObjectId,
+      ref: 'Faculty',
+    },
+    // admin: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'Admin',
+    // },
   },
   {
     timestamps: true,
@@ -21,5 +27,6 @@ const userSchema = new Schema<IUser>(
     },
   }
 );
+
 // s4. static
 export const User = model<IUser, UserModel>('User', userSchema);
