@@ -1,7 +1,7 @@
 import { Model, Types } from 'mongoose';
-import { IACFaculty } from '../AcademicFaculties/faculty.interface';
-import { IACDepartment } from '../AcademicDepartment/dept.interface';
-import { ISemester } from '../AcademicSemester/semester.interface';
+import { IACFaculty } from '../../AcademicFaculties/faculty.interface';
+import { IACDepartment } from '../../AcademicDepartment/dept.interface';
+import { ISemester } from '../../AcademicSemester/semester.interface';
 
 export type UserName = {
   firstName: string;

@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../../shared/catchAsync';
-import sendResponse from '../../../shared/sendResponse';
+import catchAsync from '../../../../shared/catchAsync';
+import sendResponse from '../../../../shared/sendResponse';
 import { IStudent } from './student.interface';
 import { StudentService } from './student.service';
 import { Request, Response } from 'express';

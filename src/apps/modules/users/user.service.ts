@@ -2,12 +2,12 @@ import mongoose from 'mongoose';
 import config from '../../../config/index';
 import ApiError from '../../../errors/ApiError';
 import { AcademicSemester } from '../AcademicSemester/semester.model';
-import { IStudent } from '../UserStudent/student.interface';
+import { IStudent } from '../user/Student/student.interface';
 import { IUser } from './user.interface';
 import { User } from './user.model';
 import { generateStudentId } from './user.utils';
 import httpStatus from 'http-status';
-import { Student } from '../UserStudent/student.model';
+import { Student } from '../user/Student/student.model';
 
 // s6. database logic
 const createStudent = async (

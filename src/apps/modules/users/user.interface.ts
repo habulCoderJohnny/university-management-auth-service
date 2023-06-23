@@ -1,5 +1,5 @@
 import { Model, Types } from 'mongoose';
-import { IStudent } from '../UserStudent/student.interface';
+import { IStudent } from '../user/Student/student.interface';
 
 // s1 Create an Interface [type declared]
 export type IUser = {
