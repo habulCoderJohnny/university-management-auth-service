@@ -5,4 +5,4 @@ const router = express.Router();
 
 router.get('/', FacultyController.getAllFaculty);
 
-export const StudentRoutes = router;
+export const FacultyRoutes = router;
