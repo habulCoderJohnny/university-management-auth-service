@@ -16,6 +16,7 @@ import { IFaculty } from '../user/Faculty/faculty.interface';
 import { Faculty } from '../user/Faculty/faculty.model';
 import { IAdmin } from '../user/Admin/admin.interface';
 import { Admin } from '../user/Admin/admin.model';
+import { ISemester } from '../AcademicSemester/semester.interface';
 
 // s6. database logic
 const createStudent = async (
@@ -39,7 +40,7 @@ const createStudent = async (
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
-    const id = await generateStudentId(academicsemester);
+    const id = await generateStudentId(academicsemester as ISemester);
     user.id = id;
     student.id = id;
 
@@ -190,15 +191,14 @@ const createAdmin = async (
   }
 
   if (newUserAllData) {
-    newUserAllData = await User.findOne({ id: newUserAllData.id });
-    // .populate({
-    //   path: 'admin',
-    //   populate: [
-    //     {
-    //       path: 'managementDepartment',
-    //     },
-    //   ],
-    // });
+    newUserAllData = await User.findOne({ id: newUserAllData.id }).populate({
+      path: 'admin',
+      populate: [
+        {
+          path: 'managementDepartment',
+        },
+      ],
+    });
   }
 
   return newUserAllData;
