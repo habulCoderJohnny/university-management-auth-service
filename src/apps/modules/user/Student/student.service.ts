@@ -1,12 +1,65 @@
 import httpStatus from 'http-status';
 import ApiError from '../../../../errors/ApiError';
-import { IStudent } from './student.interface';
+import { IStudent, IStudentFilters } from './student.interface';
 import { Student } from './student.model';
+import { IGenericResponse } from '../../../../interfaces/common';
+import { SortOrder } from 'mongoose';
+import { paginationSort } from '../../../../pagination/paginationSort';
+import { studentSearchableFields } from './student.constant';
+import { IPaginationOptions } from '../../../../pagination/typePagination';
 
 // get all service
-const getAllStudent = async (): Promise<IStudent[]> => {
-  const result = await Student.find();
-  return result;
+const getAllStudent = async (
+  filters: IStudentFilters,
+  paginationOptions: IPaginationOptions
+): Promise<IGenericResponse<IStudent[]>> => {
+  //searching
+  const { searchTerm, ...filtersData } = filters;
+  const andConditions = [];
+  if (searchTerm) {
+    andConditions.push({
+      // or
+      $or: studentSearchableFields.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    });
+  }
+  //filtering
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      //and q
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    });
+  }
+  const { page, limit, skip, sortBy, sortOrder } =
+    paginationSort.calculatePagination(paginationOptions);
+  //sorting
+  const sortConditions: { [key: string]: SortOrder } = {};
+
+  if (sortBy && sortOrder) {
+    sortConditions[sortBy] = sortOrder;
+  }
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {};
+
+  const result = await Student.find(whereConditions)
+    .sort(sortConditions)
+    .skip(skip)
+    .limit(limit);
+  const total = await Student.countDocuments();
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
 };
 
 // get one service

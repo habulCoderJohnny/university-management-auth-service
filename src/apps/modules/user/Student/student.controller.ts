@@ -4,14 +4,21 @@ import sendResponse from '../../../../shared/sendResponse';
 import { IStudent } from './student.interface';
 import { StudentService } from './student.service';
 import { Request, Response } from 'express';
+import pgPicker from '../../../../shared/pgPicker';
+import { studentFilterableFields } from './student.constant';
+import { paginationField } from '../../../../constant/pagination';
 
 const getAllStudent = catchAsync(async (req: Request, res: Response) => {
-  const result = await StudentService.getAllStudent();
+  // pagination & filtering
+  const filters = pgPicker(req.query, studentFilterableFields); //filtering
+  const paginationOptions = pgPicker(req.query, paginationField);
+  const result = await StudentService.getAllStudent(filters, paginationOptions);
   sendResponse<IStudent[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: '✅All Student retrieved successfully!',
-    data: result,
+    meta: result.meta,
+    data: result.data,
   });
 });
 

@@ -45,4 +45,8 @@ export type IStudent = {
   profileImage?: string;
 };
 
+export type IStudentFilters = {
+  searchTerm?: string;
+};
+
 export type StudentModel = Model<IStudent, Record<string, unknown>>;
