@@ -1,9 +1,6 @@
 {
   //eslint-prettier
-  "include": ["src" ,   
-  "logs/permission",
-  "logs/userPermission"
-], // which files to compile], // which files to compile
+  "include": ["src", "logs/permission", "logs/userPermission"], // which files to compile], // which files to compile
   "exclude": ["node_modules"], // which files to skip
 
   "compilerOptions": {
@@ -112,5 +109,5 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
-  },
+  }
 }

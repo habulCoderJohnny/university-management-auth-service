@@ -2,7 +2,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.organizeImports": true,
-    "cSpell.words": ["errorlogger","middlewares","virtuals"
-   ]
+    "cSpell.words": ["errorlogger", "middlewares", "virtuals"]
   }
 }
