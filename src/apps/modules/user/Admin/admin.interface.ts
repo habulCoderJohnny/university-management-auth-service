@@ -1,5 +1,5 @@
 import { Model, Types } from 'mongoose';
-import { IManagementDepartment } from '../../managementDept/managementDept.inerface';
+import { IManagementDepartment } from '../../managementDepartment/mgmt.interface';
 
 export type UserName = {
   firstName: string;
