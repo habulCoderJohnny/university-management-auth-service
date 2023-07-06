@@ -13,13 +13,21 @@ router.post(
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   ACFacultyController.createACFaculty
 );
-router.get('/:id', ACFacultyController.getOneFaculty);
+router.get(
+  '/:id',
+  auth(
+    ENUM_USER_ROLE.SUPER_ADMIN,
+    ENUM_USER_ROLE.ADMIN,
+    ENUM_USER_ROLE.FACULTY
+  ),
+  ACFacultyController.getOneFaculty
+);
 router.get(
   '/',
   auth(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
-    ENUM_USER_ROLE.STUDENT
+    ENUM_USER_ROLE.FACULTY
   ),
   ACFacultyController.getAllFaculty
 );
@@ -35,7 +43,7 @@ router.patch(
 );
 router.delete(
   '/delete/:id',
-  auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
+  auth(ENUM_USER_ROLE.SUPER_ADMIN),
   ACFacultyController.deleteFaculty
 );
 export const ACFacultyRoutes = router;

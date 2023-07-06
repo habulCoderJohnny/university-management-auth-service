@@ -23,11 +23,11 @@ const getAllFaculties = async (
   filters: IACFacultyFilters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<IACFaculty[]>> => {
-  //searching
+  // Extract searchTerm to implement search query
   const { searchTerm, ...filtersData } = filters;
   const andConditions = [];
 
-  //searching
+  // Search needs $or for searching in specified fields
   if (searchTerm) {
     andConditions.push({
       // or
@@ -39,7 +39,7 @@ const getAllFaculties = async (
       })),
     });
   }
-  //filtering
+  // Filters needs $and to fullfill all the conditions
   if (Object.keys(filtersData).length) {
     andConditions.push({
       //and q
@@ -51,6 +51,7 @@ const getAllFaculties = async (
   const { page, limit, skip, sortBy, sortOrder } =
     paginationSort.calculatePagination(paginationOptions);
 
+  // Dynamic sort needs  fields to  do sorting
   const sortConditions: { [key: string]: SortOrder } = {};
 
   if (sortBy && sortOrder) {
@@ -63,7 +64,7 @@ const getAllFaculties = async (
     .sort(sortConditions)
     .skip(skip)
     .limit(limit);
-  const total = await AcademicFaculty.countDocuments();
+  const total = await AcademicFaculty.countDocuments(whereConditions);
   return {
     meta: {
       page,

@@ -29,11 +29,11 @@ const getAllSemester = async (
   filters: ISemesterFilters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<ISemester[]>> => {
-  //searching
+  // Extract searchTerm to implement search query
   const { searchTerm, ...filtersData } = filters;
   const andConditions = [];
 
-  //searching
+  // Search needs $or for searching in specified fields
   if (searchTerm) {
     andConditions.push({
       // or
@@ -55,34 +55,10 @@ const getAllSemester = async (
     });
   }
 
-  // const andConditions = [
-  //   {
-  //     $or: [
-  //       {
-  //         title: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //         },
-  //       },
-  //       {
-  //         code: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //         },
-  //       },
-  //       {
-  //         year: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //         },
-  //       },
-  //     ],
-  //   },
-  // ];
-
   const { page, limit, skip, sortBy, sortOrder } =
     paginationSort.calculatePagination(paginationOptions);
 
+  // Dynamic  Sort needs  field to  do sorting
   const sortConditions: { [key: string]: SortOrder } = {};
 
   if (sortBy && sortOrder) {

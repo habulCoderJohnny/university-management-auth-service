@@ -18,7 +18,6 @@ import { IAdmin } from '../user/Admin/admin.interface';
 import { Admin } from '../user/Admin/admin.model';
 import { ISemester } from '../AcademicSemester/semester.interface';
 
-// s6. database logic
 const createStudent = async (
   student: IStudent,
   user: IUser
@@ -35,23 +34,24 @@ const createStudent = async (
     student.academicSemester
   ).lean();
 
-  // generate student id
   let newUserAllData = null;
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
+    // generate student id
     const id = await generateStudentId(academicsemester as ISemester);
+    // set custom id into both  student & user
     user.id = id;
     student.id = id;
 
-    //array
+    // Create student using sesssin
     const newStudent = await Student.create([student], { session });
 
     if (!newStudent.length) {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create student');
     }
 
-    //set student -->  _id into user.student
+    // set student _id (reference) into user.student
     user.student = newStudent[0]._id;
     const newUser = await User.create([user], { session });
 
@@ -100,12 +100,11 @@ const createFaculty = async (
   // set role
   user.role = 'faculty';
 
-  // generate faculty id
   let newUserAllData = null;
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
-
+    // generate faculty id
     const id = await generateFacultyId();
     user.id = id;
     faculty.id = id;

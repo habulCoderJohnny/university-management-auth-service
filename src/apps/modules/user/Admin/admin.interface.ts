@@ -19,7 +19,7 @@ export type IAdmin = {
   permanentAddress?: string;
   presentAddress?: string;
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
-  managementDepartment: Types.ObjectId | IManagementDepartment;
+  managementDepartment: Types.ObjectId | IManagementDepartment; // reference _id
   designation: string;
 };
 

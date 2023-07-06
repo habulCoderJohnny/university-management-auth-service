@@ -27,11 +27,11 @@ const getAllDepartment = async (
   filters: IACDepartmentFilters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<IACDepartment[]>> => {
-  //searching
+  // Extract searchTerm to implement search query
   const { searchTerm, ...filtersData } = filters;
   const andConditions = [];
 
-  //searching
+  // Search needs $or for searching in specified fields
   if (searchTerm) {
     andConditions.push({
       // or
@@ -43,7 +43,7 @@ const getAllDepartment = async (
       })),
     });
   }
-  //filtering
+  // Filters needs $and to fullfil all the conditions
   if (Object.keys(filtersData).length) {
     andConditions.push({
       //and q
@@ -67,7 +67,7 @@ const getAllDepartment = async (
     .sort(sortConditions)
     .skip(skip)
     .limit(limit);
-  const total = await AcademicDepartment.countDocuments();
+  const total = await AcademicDepartment.countDocuments(whereConditions);
   return {
     meta: {
       page,

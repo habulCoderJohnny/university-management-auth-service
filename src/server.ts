@@ -15,13 +15,15 @@ let serverStatus: Server;
 async function server() {
   try {
     await mongoose.connect(config.database_url as string);
-    infologger.info('♻️  Database connected✅');
+    // infologger.info('♻️  Database connected✅');
+    console.log(`🛢Database is connected successfully🤙🤝`);
 
     serverStatus = app.listen(config.port, () => {
-      infologger.info(`Application app listening on port ${config.port}`);
+      // infologger.info(`Application app listening on port ${config.port}`);
+      console.log(`Application app listening on port ${config.port}`);
     });
   } catch (err) {
-    errorlogger.error('Failed connect to database 🚫', err);
+    errorlogger.error('🙇‍♂️👎Failed connect to database', err);
   }
 
   process.on('unhandleRejection', error => {
