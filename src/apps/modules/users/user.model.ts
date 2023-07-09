@@ -14,6 +14,10 @@ const UserSchema = new Schema<IUser, UserModel>(
       type: Boolean,
       default: true,
     },
+    passwordChangedAt: {
+      type: Date,
+    },
+
     student: {
       type: Schema.Types.ObjectId,
       ref: 'Student',
@@ -37,10 +41,11 @@ const UserSchema = new Schema<IUser, UserModel>(
 
 UserSchema.statics.isUserExist = async function (
   id: string
-): Promise<Pick<
-  IUser,
-  'id' | 'password' | 'role' | 'defaultPasswordChange'
-> | null> {
+  // ): Promise<Pick<
+  //   IUser,
+  //   'id' | 'password' | 'role' | 'defaultPasswordChange'
+  // > | null> {
+): Promise<IUser | null> {
   return await User.findOne(
     { id },
     { id: 1, password: 1, role: 1, defaultPasswordChange: 1 }
@@ -54,6 +59,12 @@ UserSchema.statics.isPasswordMatched = async function (
   return await bcrypt.compare(givenPassword, savedPassword);
 };
 
+UserSchema.methods.changedPasswordAfterJwtIssued = function (
+  jwtTimestamp: number
+) {
+  console.log({ jwtTimestamp }, 'hi');
+};
+
 // User.create() / user.save()
 UserSchema.pre('save', async function (next) {
   // hashing user password
@@ -62,6 +73,9 @@ UserSchema.pre('save', async function (next) {
     user.password,
     Number(config.bycrypt_salt_rounds)
   );
+  if (!user.defaultPasswordChange) {
+    user.passwordChangedAt = new Date();
+  }
   next();
 });
 

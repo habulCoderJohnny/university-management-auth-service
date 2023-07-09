@@ -155,12 +155,11 @@ const createAdminZodSchema = z.object({
         firstName: z.string({
           required_error: 'First name is required',
         }),
+        lastName: z.string({
+          required_error: 'Last name is required',
+        }),
         middleName: z.string().optional(),
       }),
-      lastName: z.string({
-        required_error: 'Last name is required',
-      }),
-
       dateOfBirth: z.string({
         required_error: 'Date of birth is required',
       }),

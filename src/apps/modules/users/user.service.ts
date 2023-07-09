@@ -22,7 +22,7 @@ const createStudent = async (
   student: IStudent,
   user: IUser
 ): Promise<IUser | null> => {
-  // default password
+  // If password is not given,set default password
   if (!user.password) {
     user.password = config.default_student_pass as string;
   }
@@ -92,7 +92,7 @@ const createFaculty = async (
   faculty: IFaculty,
   user: IUser
 ): Promise<IUser | null> => {
-  // default password
+  // If password is not given,set default password
   if (!user.password) {
     user.password = config.default_faculty_pass as string;
   }
@@ -161,7 +161,7 @@ const createAdmin = async (
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
-    // generate student id
+    // generate Admin id
     const id = await generateAdminId();
     user.id = id;
     admin.id = id;
@@ -169,7 +169,7 @@ const createAdmin = async (
     const newAdmin = await Admin.create([admin], { session });
 
     if (!newAdmin.length) {
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create faculty');
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create Admin');
     }
 
     user.admin = newAdmin[0]._id;
@@ -177,7 +177,10 @@ const createAdmin = async (
     const newUser = await User.create([user], { session });
 
     if (!newUser.length) {
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create admin❗');
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        'Failed to create user-admin❗'
+      );
     }
     newUserAllData = newUser[0];
 

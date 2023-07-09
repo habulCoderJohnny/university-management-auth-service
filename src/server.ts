@@ -16,7 +16,7 @@ async function server() {
   try {
     await mongoose.connect(config.database_url as string);
     // infologger.info('♻️  Database connected✅');
-    console.log(`🛢 Database is connected successfully✌️`);
+    console.log(`♻️  Database is connected successfully✌️`);
 
     serverStatus = app.listen(config.port, () => {
       // infologger.info(`Application app listening on port ${config.port}`);
