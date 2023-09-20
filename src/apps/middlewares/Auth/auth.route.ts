@@ -14,7 +14,7 @@ router.post(
 );
 
 router.post(
-  '/reset-password',
+  '/change-password',
   validateRequest(AuthValidation.changePasswordZodSchema),
   auth(
     ENUM_USER_ROLE.SUPER_ADMIN,
