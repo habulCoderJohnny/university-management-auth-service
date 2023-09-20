@@ -8,7 +8,7 @@ import { ENUM_USER_ROLE } from '../../../enums/user';
 const router = express.Router();
 
 router.post(
-  '/create-department',
+  '/create-management',
   validateRequest(ManagementDeptValidation.createManagementDeptZodSchema),
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   ManagementDeptController.createDepartment

@@ -8,7 +8,7 @@ import { ENUM_USER_ROLE } from '../../../enums/user';
 const router = express.Router();
 
 router.post(
-  '/create',
+  '/create-faculty',
   validateRequest(ACFacultyValidation.createFacultyZodSchema),
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   ACFacultyController.createACFaculty
@@ -32,7 +32,7 @@ router.get(
   ACFacultyController.getAllFaculty
 );
 router.patch(
-  '/update/:id',
+  '/:id',
   validateRequest(ACFacultyValidation.updateFacultyZodSchema),
   auth(
     ENUM_USER_ROLE.SUPER_ADMIN,
@@ -42,7 +42,7 @@ router.patch(
   ACFacultyController.updateFaculty
 );
 router.delete(
-  '/delete/:id',
+  '/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN),
   ACFacultyController.deleteFaculty
 );

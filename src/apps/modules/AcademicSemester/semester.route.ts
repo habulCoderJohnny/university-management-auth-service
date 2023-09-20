@@ -8,7 +8,7 @@ import { ENUM_USER_ROLE } from '../../../enums/user';
 const router = express.Router();
 
 router.post(
-  '/create',
+  '/create-semester',
   validateRequest(SemesterValidation.semesterZodSchema),
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   SemesterController.createSemester
@@ -34,13 +34,13 @@ router.get(
   SemesterController.getAllSemester
 );
 router.patch(
-  '/update/:id',
+  '/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   validateRequest(SemesterValidation.updateAcSemesterZodSchema),
   SemesterController.updateSemester
 );
 router.delete(
-  '/delete/:id',
+  '/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   SemesterController.deleteSemester
 );

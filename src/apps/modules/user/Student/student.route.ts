@@ -31,13 +31,13 @@ router.get(
 );
 
 router.patch(
-  '/update/:id',
+  '/:id',
   validateRequest(StudentValidaion.updateStudentZodSchema),
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   StudentController.updateStudent
 );
 router.delete(
-  '/delete/:id',
+  '/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN),
   StudentController.deleteStudent
 );

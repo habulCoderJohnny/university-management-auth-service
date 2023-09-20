@@ -7,7 +7,7 @@ import auth from '../../middlewares/auth';
 
 const router = express.Router();
 router.post(
-  '/create',
+  '/create-dept',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   validateRequest(ACDepartmentValidation.createDepartmentZodSchema),
   ACDepartmentController.createACDepartment
@@ -15,13 +15,13 @@ router.post(
 router.get('/:id', ACDepartmentController.getOneDepartment);
 router.get('/', ACDepartmentController.getAllDepartment);
 router.patch(
-  '/update/:id',
+  '/:id',
   validateRequest(ACDepartmentValidation.updateDepartmentZodSchema),
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   ACDepartmentController.updateDepartment
 );
 router.delete(
-  '/delete/:id',
+  '/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   ACDepartmentController.deleteDepartment
 );

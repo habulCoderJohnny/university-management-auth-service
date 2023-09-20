@@ -13,39 +13,39 @@ const router = express.Router();
 
 const ApplicationRoutes = [
   {
-    path: '/users',
-    route: UserRoutes,
-  },
-  {
-    path: '/semesters',
-    route: AcademicSemesterRoutes,
-  },
-  {
-    path: '/faculties',
-    route: ACFacultyRoutes,
-  },
-  {
-    path: '/department',
-    route: ACDepartmentRoutes,
-  },
-  {
-    path: '/student',
-    route: StudentRoutes,
-  },
-  {
-    path: '/faculty',
-    route: FacultyRoutes,
-  },
-  {
     path: '/auth',
     route: AuthRoutes,
+  },
+  {
+    path: '/users',
+    route: UserRoutes,
   },
   {
     path: '/admins',
     route: AdminRoutes,
   },
   {
-    path: '/management-department',
+    path: '/students',
+    route: StudentRoutes,
+  },
+  {
+    path: '/semesters',
+    route: AcademicSemesterRoutes,
+  },
+  {
+    path: '/aca-faculties',
+    route: ACFacultyRoutes,
+  },
+  {
+    path: '/departments',
+    route: ACDepartmentRoutes,
+  },
+  {
+    path: '/faculties',
+    route: FacultyRoutes,
+  },
+  {
+    path: '/management-dept',
     route: ManagementDepartmentRoutes,
   },
 ];

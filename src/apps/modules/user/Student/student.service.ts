@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
 import ApiError from '../../../../errors/ApiError';
 import { IStudent, IStudentFilters } from './student.interface';
